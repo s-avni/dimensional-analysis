@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!--todo: remove-->
+{% for message in get_flashed_messages() %}
+    <div class="container">
+<div class="alert alert-warning">
+    <button class="close" data-dismiss="alert" type="button">&times;</button>
+    {{ message }}
+</div>
+    </div>
+{% endfor %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>Dimensional Analysis</h1>
+        <blockquote>
+            Dimensional analysis is a simple, clear and intuitive method for determining
+            the functional dependence of physical quantities that are of importance to a
+            certain process.
+            <cite>Tatjana Misic</cite>
+        </blockquote>
+        <br/>
+        <h5>Available dimensions: </h5><h6></h6> <b>length</b>, <b>time</b>, current, luminosity, <b>mass</b>, substance, <b>temperature</b>, area,
+            volume, <b>frequency</b>, wavenmumber, <b>velocity</b>, speed, acceleration, <b>force</b>,
+            power, density, pressure, <b>torque</b>, viscosity, kinematic viscosity, fluidity,
+            concentration, activity, entropy, molar entropy, heat transmission,
+            luminance, luminous flux, intensity, <b>charge</b>, electric potential, electric field,
+            electric displacement field, resistance, resistivity, conductance, inductance,
+            magnetic flux, magnetic field, magnetomotive force, electric dipole, magnetic field strength, electric quadropole </h6><cite><a href="https://github.com/hgrecco/pint/blob/master/pint/default_en.txt">For more details</a></cite>
+
+        <br/>
+        <br/>
+        <h5>Input examples: </h5><h6></h6> [length] / [time], [mass] * [acceleration], [velocity] ** 3 / [torque] </h6><cite><a href="https://github.com/hgrecco/pint/blob/master/pint/default_en.txt">For more details</a></cite>
+    </div>
+</div>
+
+<div class="container">
+    <div id="accordion">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    Discover a Dimensionless Combination
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse">
+                <div class="card-body">
+                    <p>Enter dimensions and receive their dimensionless combination.
+                    <span class="text-info"><i>e.g. Name: <b>g</b>; Dimension: <b>L/T^2</b> </i></span></p>
+                    <form action="" method="post" novalidate>
+                        {% for v in form1.vars %}
+                                {% set in_form = v.form %} <!-- so weird that nothing else worked -->
+                                {% with name=in_form.var_name, dim=in_form.var_dim %}
+                                    {% include "input_element.html" %}
+                                {% endwith %}
+                        {% endfor %}
+                        <p>{{ form1.submit() }}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseTwo">
+                    Express a Dimension
+                </a>
+            </div>
+            <div id="collapseTwo" class="collapse">
+                <div class="card-body">
+                    Given dimensions, get the combination of them that gives a desired dimension.
+                    <span class="text-info"><i>e.g. Desired Dim: 1/T Name: <b>g</b>; Dimension: <b>L/T^2</b> </i></span></p>
+                    <form action="" method="post" novalidate>
+                        {% set in_desired_dim = form2.desired_dim %} <!-- so weird that nothing else worked -->
+                        {% with desired_dim=in_desired_dim %}
+                            {% include "desired_dim_element.html" %}
+                        {% endwith %}
+                        <hr/>
+                        {% for v in form2.vars %}
+                                {% set in_form = v.form %} <!-- so weird that nothing else worked -->
+                                {% with name=in_form.var_name, dim=in_form.var_dim %}
+                                    {% include "input_element.html" %}
+                                {% endwith %}
+                        {% endfor %}
+                        <p>{{ form2.submit() }}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
