@@ -54,11 +54,12 @@
                     Discover a Dimensionless Combination
                 </a>
             </div>
-            <div id="collapseOne" class="collapse">
+            <div id="collapseOne" class="{% if result or error %}collapse show{% else %}collapse{% endif %}">
                 <div class="card-body">
                     <p>Enter dimensions and receive their dimensionless combination.
-                    <span class="text-info"><i>e.g. Name: <b>g</b>; Dimension: <b>L/T^2</b> </i></span></p>
+                    <span class="text-info"><i>e.g. Name: <b>g</b>; Dimension: <b>[length]/[time]^2</b> </i></span></p>
                     <form action="" method="post" novalidate>
+                        <input type="hidden" name="form_type" value="dimensionless">
                         {% for v in form1.vars %}
                                 {% set in_form = v.form %} <!-- so weird that nothing else worked -->
                                 {% with name=in_form.var_name, dim=in_form.var_dim %}
@@ -67,6 +68,12 @@
                         {% endfor %}
                         <p>{{ form1.submit() }}</p>
                     </form>
+                    {% if result is not none %}
+                        <span class="text-success bold"><h3>{{ result }}</h3></span>
+                    {%  endif %}
+                    {% if error is not none %}
+                        <span class="text-danger"><b>{{ error }}</b></span>
+                    {%  endif %}
                 </div>
             </div>
         </div>
@@ -77,11 +84,12 @@
                     Express a Dimension
                 </a>
             </div>
-            <div id="collapseTwo" class="collapse">
+            <div id="collapseTwo" class="{% if result2 or error2 %}collapse show{% else %}collapse{% endif %}">
                 <div class="card-body">
                     Given dimensions, get the combination of them that gives a desired dimension.
                     <span class="text-info"><i>e.g. Desired Dim: 1/T Name: <b>g</b>; Dimension: <b>L/T^2</b> </i></span></p>
                     <form action="" method="post" novalidate>
+                        <input type="hidden" name="form_type" value="dimension">
                         {% set in_desired_dim = form2.desired_dim %} <!-- so weird that nothing else worked -->
                         {% with desired_dim=in_desired_dim %}
                             {% include "desired_dim_element.html" %}
@@ -95,11 +103,35 @@
                         {% endfor %}
                         <p>{{ form2.submit() }}</p>
                     </form>
+                    {% if result2 is not none %}
+                        <span class="text-success bold"><h3>{{ result2 }}</h3></span>
+                    {%  endif %}
+                    {% if error2 is not none %}
+                        <span class="text-danger"><b>{{ error2 }}</b></span>
+                    {%  endif %}
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
+<br/>
+<br/>
+
+{% if result or error %}
+<!--https://stackoverflow.com/questions/31863582/automatically-scroll-to-a-div-when-flask-returns-rendered-template-->
+<script>
+    document.location.hash = '#' + 'collapseOne';
+</script>
+{% endif %}
+
+{% if result2 or error2 %}
+<!--https://stackoverflow.com/questions/31863582/automatically-scroll-to-a-div-when-flask-returns-rendered-template-->
+<script>
+    document.location.hash = '#' + 'collapseTwo';
+</script>
+{% endif %}
+
 </body>
 </html>

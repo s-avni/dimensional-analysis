@@ -26,7 +26,7 @@ The only automatic dinmensional analysis tool that I found online is that of Wol
 ## Todos
 
 1. sitemap.xml
-2. input validation
 3. dynamic number of inputs (more than MAX)
 4. shortcut inputs: e.g. T for [time]
-5. talk about using actuall units, e.g. "meter"
+5. allow units, e.g. "meter"
+6. "express a dimension option" //I've been too lazy to implement

@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired
 
 MIN_VALIDATORS = 2
 
+
 class VariablesForm(FlaskForm):
     var_name = StringField('Name', validators=[DataRequired()])
     var_dim = StringField('Dimension', validators=[DataRequired()])
@@ -12,6 +13,7 @@ class VariablesForm(FlaskForm):
 class DimensionlessForm(FlaskForm):
     vars = FieldList(FormField(VariablesForm), min_entries=MIN_VALIDATORS+1)
     submit = SubmitField('Find combination!')
+
 
 class DimensionForm(FlaskForm):
     desired_dim = StringField('Desired dimension', validators=[DataRequired()])
