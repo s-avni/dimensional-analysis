@@ -29,4 +29,4 @@ The only automatic dinmensional analysis tool that I found online is that of Wol
 3. dynamic number of inputs (more than MAX)
 4. shortcut inputs: e.g. T for [time]
 5. allow units, e.g. "meter"
-6. "express a dimension option" //I've been too lazy to implement
+6. cookies -- remembering previous inputs

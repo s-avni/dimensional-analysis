@@ -37,11 +37,11 @@
             concentration, activity, entropy, molar entropy, heat transmission,
             luminance, luminous flux, intensity, <b>charge</b>, electric potential, electric field,
             electric displacement field, resistance, resistivity, conductance, inductance,
-            magnetic flux, magnetic field, magnetomotive force, electric dipole, magnetic field strength, electric quadropole </h6><cite><a href="https://github.com/hgrecco/pint/blob/master/pint/default_en.txt">For more details</a></cite>
+            magnetic flux, magnetic field, magnetomotive force, electric dipole, magnetic field strength, electric quadropole </h6><cite><a href="https://github.com/hgrecco/pint/blob/master/pint/default_en.txt">(More details here)</a></cite>
 
         <br/>
         <br/>
-        <h5>Input examples: </h5><h6></h6> [length] / [time], [mass] * [acceleration], [velocity] ** 3 / [torque] </h6><cite><a href="https://github.com/hgrecco/pint/blob/master/pint/default_en.txt">For more details</a></cite>
+        <h5>Input examples: </h5><h6></h6> [length] / [time], [mass] * [acceleration], [velocity] ** 3 / [torque] </h6><cite><a href="https://github.com/hgrecco/pint/blob/master/pint/default_en.txt">(More details here)</a></cite>
     </div>
 </div>
 
@@ -87,7 +87,7 @@
             <div id="collapseTwo" class="{% if result2 or error2 %}collapse show{% else %}collapse{% endif %}">
                 <div class="card-body">
                     Given dimensions, get the combination of them that gives a desired dimension.
-                    <span class="text-info"><i>e.g. Desired Dim: 1/T Name: <b>g</b>; Dimension: <b>L/T^2</b> </i></span></p>
+                    <span class="text-info"><i>e.g. Desired Dim: <b>1/[time]</b> Name: <b>g</b>; Dimension: <b>[length]/[time]^2</b> </i></span></p>
                     <form action="" method="post" novalidate>
                         <input type="hidden" name="form_type" value="dimension">
                         {% set in_desired_dim = form2.desired_dim %} <!-- so weird that nothing else worked -->
