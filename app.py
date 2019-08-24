@@ -7,7 +7,7 @@ import re
 
 logging.basicConfig(level=logging.DEBUG)
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 app.config['WTF_CSRF_ENABLED'] = False
 
