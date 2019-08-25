@@ -113,11 +113,11 @@ def get_combination_for(vars_dict):
     result = pi_theorem(vars_dict)  # https://buildmedia.readthedocs.org/media/pdf/pint/latest/pint.pdf
     if len(result) == 0:
         return ERROR + "it is not possible to find a dimensionless combination for your input"
-    # print("\n*************\n")
-    # print(result)
-    # print(formatter(result[0].items()))
+    print("\n*************\n")
+    print(result)
+    print(formatter(result[0].items(), single_denominator=True, power_fmt='({}^{})'))
     # raise ValueError
-    pretty_result = formatter(result[0].items())
+    pretty_result = formatter(result[0].items(), single_denominator=True, power_fmt='({}^{})')
     return pretty_result
 
 
