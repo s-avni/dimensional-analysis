@@ -4,8 +4,6 @@ frontend:
     # IMPORTANT - Please verify your build commands
     build:
       commands:
-        - pip install -r requirements.txt
-        - python app.py
   artifacts:
     # IMPORTANT - Please verify your build output directory
     baseDirectory: /
