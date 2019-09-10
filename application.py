@@ -7,9 +7,9 @@ import re
 
 logging.basicConfig(level=logging.DEBUG)
 
-app = Flask(__name__, template_folder='templates')
-app.config['SECRET_KEY'] = 'you-will-never-guess'
-app.config['WTF_CSRF_ENABLED'] = False
+application = Flask(__name__, template_folder='templates')
+application.config['SECRET_KEY'] = 'you-will-never-guess'
+application.config['WTF_CSRF_ENABLED'] = False
 
 ERROR = "Error: "
 DUMMY = "Dummy"
@@ -189,7 +189,7 @@ def get_combination_for(vars_dict):
     return pretty_result
 
 
-@app.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
 def index():
     dimensionless_form = DimensionlessForm()
     dimension_form = DimensionForm()
@@ -221,5 +221,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run()
 
