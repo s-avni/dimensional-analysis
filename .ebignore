@@ -1,8 +1,0 @@
-__pycache__/
-*.pkl
-venv/
-venv*
-*.idea
-*.pyc
-.gitignore
-.git/*

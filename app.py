@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, request
+from flask import Flask, render_template, request
 from pint_wrapper.form import DimensionlessForm, DimensionForm
 from pint import pi_theorem
 from pint import formatter
@@ -7,9 +7,9 @@ import re
 
 logging.basicConfig(level=logging.DEBUG)
 
-application = Flask(__name__, template_folder='templates')
-application.config['SECRET_KEY'] = 'you-will-never-guess'
-application.config['WTF_CSRF_ENABLED'] = False
+app = Flask(__name__, template_folder='templates')
+app.config['SECRET_KEY'] = 'you-will-never-guess'
+app.config['WTF_CSRF_ENABLED'] = False
 
 ERROR = "Error: "
 DUMMY = "Dummy"
@@ -189,7 +189,7 @@ def get_combination_for(vars_dict):
     return pretty_result
 
 
-@application.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     dimensionless_form = DimensionlessForm()
     dimension_form = DimensionForm()
@@ -221,5 +221,5 @@ def index():
 
 
 if __name__ == '__main__':
-    application.run()
+    app.run()
 
