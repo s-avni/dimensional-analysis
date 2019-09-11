@@ -1,1 +1,1 @@
-web: gunicorn dim-analysis:app
+web: gunicorn app:app
