@@ -25,8 +25,6 @@ The only automatic dinmensional analysis tool that I found online is that of Wol
 
 ## Todos
 
-1. sitemap.xml
-3. dynamic number of inputs (more than MAX)
-4. shortcut inputs: e.g. T for [time]
-5. allow units, e.g. "meter"
-6. cookies -- remembering previous inputs
+1. dynamic number of inputs (more than MAX)
+2. allow units, e.g. "meter"
+3. cookies -- remembering previous inputs
