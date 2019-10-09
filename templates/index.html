@@ -17,7 +17,6 @@ dimensionless combination or your desired dimension.">
 </head>
 <body>
 
-<!--todo: remove-->
 {% for message in get_flashed_messages() %}
     <div class="container">
 <div class="alert alert-warning">
@@ -67,7 +66,7 @@ dimensionless combination or your desired dimension.">
                     <form action="" method="post" novalidate>
                         <input type="hidden" name="form_type" value="dimensionless">
                         {% for v in form1.vars %}
-                                {% set in_form = v.form %} <!-- so weird that nothing else worked -->
+                                {% set in_form = v.form %}
                                 {% with name=in_form.var_name, dim=in_form.var_dim %}
                                     {% include "input_element.html" %}
                                 {% endwith %}
@@ -96,13 +95,13 @@ dimensionless combination or your desired dimension.">
                     <span class="text-info"><i>e.g. Desired Dim: <b>1/[time]</b> Name: <b>g</b>; Dimension: <b>[length]/[time]^2</b> </i></span></p>
                     <form action="" method="post" novalidate>
                         <input type="hidden" name="form_type" value="dimension">
-                        {% set in_desired_dim = form2.desired_dim %} <!-- so weird that nothing else worked -->
+                        {% set in_desired_dim = form2.desired_dim %}
                         {% with desired_dim=in_desired_dim %}
                             {% include "desired_dim_element.html" %}
                         {% endwith %}
                         <hr/>
                         {% for v in form2.vars %}
-                                {% set in_form = v.form %} <!-- so weird that nothing else worked -->
+                                {% set in_form = v.form %}
                                 {% with name=in_form.var_name, dim=in_form.var_dim %}
                                     {% include "input_element.html" %}
                                 {% endwith %}
