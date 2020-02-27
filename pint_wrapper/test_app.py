@@ -72,5 +72,6 @@ class TestFormat_dimension_result(TestCase):
         res = "V * " + DUMMY + "^5"
         self.assertEqual(get_power_of_dummy_var(res), "5")
 
+
 if __name__ == "__main__":
     unittest.main()

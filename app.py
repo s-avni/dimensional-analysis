@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request
-from pint_wrapper.form import DimensionlessForm, DimensionForm
-from pint import pi_theorem, formatter, UnitRegistry
 import logging
 import re
+
+from flask import Flask, render_template, request
+from pint import UnitRegistry, formatter
+
+from pint_wrapper.form import DimensionForm, DimensionlessForm
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -18,12 +20,14 @@ REMOVE_A_VAR = "REMOVE A VARIABLE"  # e.g. DUMMY = [mass], m=[mass], T=[time], f
 
 SHORTCUT_DICT = {"[L]": "[length]", "[t]": "[time]", "[M]": "[mass]", "[f]": "[frequency]", "[T]": "[temperature]",
                  "[V]": "[volume]", "[A]": "[area]", "[v]": "[velocity]", "[s]": "[speed]", "[a]": "[acceleration]",
-                 "[F]": "[force]", "[P]" : "[pressure]"}
+                 "[F]": "[force]", "[P]": "[pressure]"}
+
 
 def get_word_partition(var_dim):
-    partition_with_blanks =  re.split('(\[\w*\])', var_dim) #['', '[T]', ' / ', '[V]', '']
+    partition_with_blanks = re.split('(\[\w*\])', var_dim)  # ['', '[T]', ' / ', '[V]', '']
     partition = [s for s in partition_with_blanks if s]
     return partition
+
 
 def replace_acronyms_and_return_word(partition):
     partition = [SHORTCUT_DICT.get(s, s) for s in partition]
@@ -32,13 +36,13 @@ def replace_acronyms_and_return_word(partition):
 
 
 def get_complete_dim_word(var_dim):
-    #replaces acronyms even if in one line. e.g. var_dim = [L] / [T]
+    # replaces acronyms even if in one line. e.g. var_dim = [L] / [T]
     var_dim = var_dim.strip()
-    var_dim = var_dim.replace(" ", "") #so no spaces!, e.g. "[   time]"
-    #re.findall('\(([^)]+)', s)
+    var_dim = var_dim.replace(" ", "")  # so no spaces!, e.g. "[   time]"
     partitioned_words = get_word_partition(var_dim)
     print(partitioned_words)
     return replace_acronyms_and_return_word(partitioned_words)
+
 
 def get_pint_vars_from_form(form):
     """
@@ -93,8 +97,6 @@ def format_dimension_result(res):
     dummy_power = get_power_of_dummy_var(res)
     if dummy_power != "":
         res = res.replace(DUMMY + "^" + dummy_power, DUMMY)  # easier to work with DUMMY only, use power later
-    # print("dummy power")
-    # print(dummy_power)
     split_result = res.split("/")
     assert len(split_result) == 2
     fixed_parts = [None, None]  # what goes first, what goes second, split by "/"
@@ -114,8 +116,6 @@ def format_dimension_result(res):
     # avoid situations like: (T) / V or T / (V)
     for i in [0, 1]:
         if "*" not in fixed_parts[i]:
-            # print("yes")
-            # print(fixed_parts[i])
             fixed_parts[i] = fixed_parts[i].replace("(", "")
             fixed_parts[i] = fixed_parts[i].replace(")", "")
         # avoid random whitespace
@@ -203,13 +203,8 @@ def get_combination_for(vars_dict):
         return ERROR + "please enter some input"
     ureg = UnitRegistry()
     result = ureg.pi_theorem(vars_dict)  # https://buildmedia.readthedocs.org/media/pdf/pint/latest/pint.pdf
-    # print("\n*************\n")
-    # print(result)
     if len(result) == 0:
         return ERROR + "it is not possible to find a dimensionless combination for your input"
-    # print("WOW\n\n")
-    # print(formatter(result[0].items(), single_denominator=True, power_fmt='{}^{}'))
-    # raise ValueError
     pretty_result = formatter(result[0].items(), single_denominator=True, power_fmt='{}^{}')
     return pretty_result
 
